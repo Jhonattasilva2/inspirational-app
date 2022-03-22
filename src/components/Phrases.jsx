@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 function Phrases() {
   const [quote, setQuote] = useState("arroz");
   const [person, setPerson] = useState("banana");
+  const [counter, setCounter] = useState(15)
 
   useEffect(() => {
     fetch("https://zenquotes.io/api/random")
@@ -20,6 +21,7 @@ function Phrases() {
     <>
       <Frases>{quote}</Frases>
       <Autor>{person}</Autor>
+      <Counter>{counter}</Counter>
     </>
   );
 }
@@ -34,5 +36,12 @@ const Autor = styled.p`
   color: #fff;
   font-size: 20px;
 `;
+
+const Counter = styled.span`
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  color: #FFF;
+`
 
 export default Phrases;

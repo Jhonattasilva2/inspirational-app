@@ -23,6 +23,7 @@ justify-content: center;
 align-items: center;
 flex-direction: column;
 flex-wrap: wrap;
+position: relative;
 `
 
 export default Div
