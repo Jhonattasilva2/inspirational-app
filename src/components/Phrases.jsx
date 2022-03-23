@@ -2,11 +2,13 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 
 function Phrases() {
-  const [quote, setQuote] = useState("arroz");
-  const [person, setPerson] = useState("banana");
-  const [counter, setCounter] = useState(15)
+  const [quote, setQuote] = useState(
+    "Quality means doing it right when no one is looking"
+  );
+  const [person, setPerson] = useState("Henry Ford");
+  const [seconds, setSeconds] = useState(15);
 
-  useEffect(() => {
+  function fetchApi() {
     fetch("https://zenquotes.io/api/random")
       .then((resp) => resp.json())
       .then((data) => {
@@ -15,13 +17,27 @@ function Phrases() {
         setPerson(data[0].a);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }
+
+  useEffect(() => {
+    if (seconds >= 0) {
+      const TimerInt = setInterval(() => {
+        setSeconds((seconds) => seconds - 1);
+      }, 1000);
+      return () => {
+        clearInterval(TimerInt);
+      };
+    } else {
+      setSeconds(15);
+      fetchApi();
+    }
+  }, [seconds]);
 
   return (
     <>
-      <Frases>{quote}</Frases>
+      <Frases>"{quote}"</Frases>
       <Autor>{person}</Autor>
-      <Counter>{counter}</Counter>
+      <Counter>{seconds}</Counter>
     </>
   );
 }
@@ -41,7 +57,7 @@ const Counter = styled.span`
   position: absolute;
   bottom: 5%;
   right: 5%;
-  color: #FFF;
-`
+  color: #fff;
+`;
 
 export default Phrases;
