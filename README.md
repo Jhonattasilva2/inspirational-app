@@ -1,4 +1,4 @@
-Project in progress
+
 
 # Getting Started with Create React App
 
